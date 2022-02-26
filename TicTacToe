@@ -1,0 +1,70 @@
+import java.util.Scanner;
+import java.io.Console;
+
+public class TicTacToe{
+
+     public static void main(String[] args) {
+
+		Console console = System.console();
+     	TicTacToeGame game;
+        int lines, columns, win;
+        lines = 3;
+        columns = 3;
+        win = 3;
+
+        if (args.length >= 2) {
+            lines = Integer.parseInt(args[0]);
+            if(lines<2){
+                System.out.println("Invalid argument, using default...");
+                lines = 3;
+            }
+            columns = Integer.parseInt(args[1]);
+            if(columns<2){
+                System.out.println("Invalid argument, using default...");
+                columns = 3;
+            }
+        }
+        if (args.length == 3){
+			// The third argument will be ignored and 3 will be used
+			win=3; //for simplcity, we will only consider the case of 3 cells to win
+        } 
+		
+        if (args.length > 3){
+            System.out.println("Too many arguments. Only the first 3 are used.");
+        } 
+        
+        game = new TicTacToeGame(lines, columns,win);
+        Scanner user = new Scanner(System.in);
+
+        while(game.getGameState() == GameState.PLAYING) {
+        	if(game.nextCellValue() == CellValue.X){
+                System.out.println(game);
+
+                System.out.println("Input a position between 1 and 9: ");
+                int input = user.nextInt();
+                System.out.println("X to play: " + input);
+                
+                game.play(input);
+
+
+
+            }else if (game.nextCellValue() == CellValue.O){
+                System.out.println(game);
+
+                System.out.println("Input a position between 1 and 9: ");
+                int input = user.nextInt();
+                System.out.println("O to play: " + input);
+                
+
+                game.play(input);
+                
+            }
+        }
+        
+        System.out.println("Result: " + game.getGameState());
+        
+ 
+
+    }
+
+}
