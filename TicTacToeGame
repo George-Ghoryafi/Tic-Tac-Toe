@@ -1,46 +1,38 @@
 public class TicTacToeGame {
-
-   /**
-	* The board of the game, stored as a single array.
-	*/
+	/**
+	 * The board of the game, stored as a one dimension array.
+	 */
 	private CellValue[] board;
 
-
-   /**
-	* level records the number of rounds that have been
-	* played so far. Starts at 0.
-	*/
+	/**
+	 * level records the number of rounds that have been played so far.
+	 */
 	private int level;
 
-   /**
-	* gameState records the current state of the game.
-	*/
+	/**
+	 * gameState records the current state of the game
+	 */
 	private GameState gameState;
 
+	/**
+	 * lines is the number of lines in the grid
+	 */
+	private int lines;
 
-   /**
-	* lines is the number of lines in the grid
-	*/
-	private final int lines;
+	/**
+	 * columns is the number of columns in the grid
+	 */
+	private int columns;
 
-   /**
-	* columns is the number of columns in the grid
-	*/
-	private final int columns;
+	/**
+	 * sizeWin is the number of cell of the same type that must be aligned to win
+	 * the game
+	 */
+	private int sizeWin;
 
-
-   /**
-	* sizeWin is the number of cell of the same type
-	* that must be aligned to win the game. 
-	* For simplicity, it will be always 3 in this assignment.
-	*/
-	private final int sizeWin; 
-
-
-   /**
-	* default constructor, for a game of 3x3, which must
-	* align 3 cells
-	*/
+	/**
+	 * default constructor, for a game of 3x3, which must align 3 cells
+	 */
 	public TicTacToeGame(){
 		lines = 3;
 		columns = 3;
@@ -56,15 +48,13 @@ public class TicTacToeGame {
 
 	}
 
-   /**
-	* constructor allowing to specify the number of lines
-	* and the number of columns for the game. 3 cells must
-	* be aligned.
-   	* @param lines
-    *  the number of lines in the game
-    * @param columns
-    *  the number of columns in the game
-  	*/
+	/**
+	 * constructor allowing to specify the number of lines and the number of columns
+	 * for the game. 3 cells must be aligned.
+	 * 
+	 * @param lines   the number of lines in the game
+	 * @param columns the number of columns in the game
+	 */
 	public TicTacToeGame(int lines, int columns){
 		this.lines = lines;
 		this.columns = columns;
@@ -79,17 +69,14 @@ public class TicTacToeGame {
 		gameState = GameState.PLAYING;
 	}
 
-   /**
-	* constructor allowing to specify the number of lines
-	* and the number of columns for the game, as well as
-	* the number of cells that must be aligned to win.
-   	* @param lines
-    *  the number of lines in the game
-    * @param columns
-    *  the number of columns in the game
-    * @param sizeWin
-    *  the number of cells that must be aligned to win.
-  	*/
+	/**
+	 * constructor allowing to specify the number of lines and the number of columns
+	 * for the game, as well as the number of cells that must be aligned to win.
+	 * 
+	 * @param lines   the number of lines in the game
+	 * @param columns the number of columns in the game
+	 * @param sizeWin the number of cells that must be aligned to win.
+	 */
 	public TicTacToeGame(int lines, int columns, int sizeWin){
 		this.lines = lines;
 		this.columns = columns;
@@ -106,25 +93,27 @@ public class TicTacToeGame {
 	}
 
 
-
-   /**
-	* getter for the variable lines
-	* @return
-	* 	the value of lines
-	*/
 	public int getLen(){
 		return board.length;
 	}
 
-	public int getLines(){
+	public CellValue getCellVal(int i){
+		return board[i-1];
+	}
+	/**
+	 * getter for the variable lines
+	 * 
+	 * @return the value of lines
+	 */
+	public int getLines() {
 		return lines;
 	}
 
-   /**
-	* getter for the variable columns
-	* @return
-	* 	the value of columns
-	*/
+	/**
+	 * getter for the variable columns
+	 * 
+	 * @return the value of columns
+	 */
 	public int getColumns(){
 		return columns;
 	}
@@ -138,12 +127,11 @@ public class TicTacToeGame {
 		return level;
 	}
 
-
-   /**
-	* getter for the variable gameState
-	* @return
-	* 	the value of gameState
-	*/
+	/**
+	 * getter for the variable sizeWin
+	 * 
+	 * @return the value of sizeWin
+	 */
 	public GameState getGameState(){
 		return gameState;
 	}
@@ -157,16 +145,14 @@ public class TicTacToeGame {
 		return sizeWin;
 	}
 
-   /**
-	* returns the cellValue that is expected next,
-	* in other word, which played (X or O) should
-	* play next.
-	* This method does not modify the state of the
-	* game.
-	* @return
-    *  the value of the enum CellValue corresponding
-    * to the next expected value.
-  	*/
+
+	/**
+	 * returns the cellValue that is expected next, in other word, which player (X
+	 * or O) should play next. This method does not modify the state of the game.
+	 * 
+	 * @return the value of the enum CellValue corresponding to the next expected
+	 *         value.
+	 */
 	public CellValue nextCellValue(){ //complete
 		int X_count = 0;
 		int O_count = 0; 
@@ -190,38 +176,30 @@ public class TicTacToeGame {
 		}
 	}
 
-   /**
-	* returns the value  of the cell at
-	* index i.
-	* If the index is invalid, an error message is
-	* printed out. The behaviour is then unspecified
-   	* @param i
-    *  the index of the cell in the array board
-    * @return
-    *  the value at index i in the variable board.
-  	*/
+
+	/**
+	 * returns the value of the cell at index i. If the index is invalid, an error
+	 * message is printed out. The behavior is then unspecified
+	 * 
+	 * @param i the index of the cell in the array board
+	 * @return the value at index i in the variable board.
+	 */
 	public CellValue valueAt(int i) { //complete
 		return board[i-1];
 	}
 
    /**
-	* This method is called by the next player to play
-	* at the cell  at index i.
-	* If the index is invalid, an error message is
-	* printed out. The behaviour is then unspecified
-	* If the chosen cell is not empty, an error message is
-	* printed out. The behaviour is then unspecified
-	* If the move is valide, the board is updated, as well
-	* as the state of the game.
-	* To faciliate testing, it is acceptable to keep playing
-	* after a game is already won. If that is the case, the
-	* a message should be printed out and the move recorded.
-	* the  winner of the game is the player who won first
+	* This method is called by the next player to play at the cell  at index i.
+	* If the index is invalid, an error message is printed out. The behaviour is then unspecified
+	* If the chosen cell is not empty, an error message is printed out. The behaviour is then unspecified
+	* If the move is valide, the board is updated, as well as the state of the game.
+	* To faciliate testing, it is acceptable to keep playing after a game is already won. 
+	* If that is the case, the a message should be printed out and the move recorded. 
+	* The winner of the game is the player who won first
    	* @param i
-    *  the index of the cell in the array board that has been
-    * selected by the next player
+    *  the index of the cell in the array board that has been selected by the next player
   	*/
-	public void play(int i) { //complete
+	  public void play(int i) { //complete
 		if(board[i-1] == CellValue.EMPTY){
 			board[i-1] = nextCellValue();  
 		}else{
@@ -233,6 +211,7 @@ public class TicTacToeGame {
 
 	}
 
+
    /**
 	* A helper method which updates the gameState variable
 	* correctly after the cell at index i was just set.
@@ -242,13 +221,14 @@ public class TicTacToeGame {
 	* not already finished when the cell at index i was played
 	* (the the game was playing). Therefore, it only needs to
 	* check if playing at index i has concluded the game
-	* So check if 3 cells are formed to win.
-//   	* @param i
+	****************************** 
+	*So check if the required number of sizeWin cells are formed to win.
+	******************************
     *  the index of the cell in the array board that has just
     * been set
   	*/
 
-	private void setGameState(int index){ //works for 3x3
+	  private void setGameState(int index){ 
 		int X_count = 0;
 		int O_count = 0; 
 		int EM_count = 9; 
@@ -276,14 +256,14 @@ public class TicTacToeGame {
 		if(X_count > 2 || O_count > 2){
 			for(int i = 0; i<lines; i++){
 				for(int j = 0; j<columns; j++){
-					checkWinner1(i,j,true); //row
-					checkWinner1(i,j,false); //colunns
-					checkWinner2(i,j,true); //main diag
-					checkWinner2(i,j,false); //second diag
+					checkWinner1(i,j,true, twice); //row
+					checkWinner1(i,j,false, twice); //colunns
+					checkWinner2(i,j,true, twice); //main diag
+					checkWinner2(i,j,false, twice); //second diag
 				}
 			}
 
-		if(!(gameState -- GameState.XWIN || gamestate == GameState.OWIN)){
+		if(!(gameState == GameState.XWIN || gameState == GameState.OWIN)){
 			gameState = GameState.DRAW;
 		}
 		
@@ -291,8 +271,9 @@ public class TicTacToeGame {
 
 
 	}
-	
-	void checkWinner1(int row, int col, boolean isRow){
+
+
+	void checkWinner1(int row, int col, boolean isRow, CellValue[][] twice){
 		boolean winner = false;
 
 		if(isRow){
@@ -317,13 +298,14 @@ public class TicTacToeGame {
 	}
 	
 }
-	void checkWinner2(int row, int col, boolean isMain){
+	void checkWinner2(int row, int col, boolean isMain, CellValue[][] twice){
+		boolean winner = false;
 		if(isMain){
 			if(col+2<columns && row+2<lines && twice[row][col] == twice[row+1][col+1] && twice[row][col] == twice[row+2][col+2]){
 				winner = true;
 			}
 			else{
-				if(col+2<columns && row+2<lines && twice[row][col] == twice[row+1][col-1] && twice[row][col] == twice[row+2][col-2]){
+				if(col-2>=0 && row+2<lines && twice[row][col] == twice[row+1][col-1] && twice[row][col] == twice[row+2][col-2]){
 					winner = true;
 				}
 			}
@@ -344,6 +326,10 @@ public class TicTacToeGame {
 
 
 
+
+	final String NEW_LINE = System.getProperty("line.separator");
+	// returns the OS dependent line separator
+
    /**
 	* Returns a String representation of the game matching
 	* the example provided in the assignment's description
@@ -351,10 +337,8 @@ public class TicTacToeGame {
    	* @return
     *  String representation of the game
   	*/
-  	final String NEW_LINE = System.getProperty("line.separator");
 
-
-	public String toString(){
+	  public String toString(){
 		String l1 = (board[0].name() + "  |  " + board[1].name() + "  |  " + board[2].name()); 
 		String l2 = (board[3].name() + "  |  " + board[4].name() + "  |  " + board[5].name());
 		String l3 = (board[6].name() + "  |  " + board[7].name() + "  |  " + board[8].name());
@@ -362,6 +346,4 @@ public class TicTacToeGame {
 		
 		return (l1 + NEW_LINE + separator + NEW_LINE + l2 + NEW_LINE + separator + NEW_LINE + l3);
 	}
-
-	
 }
